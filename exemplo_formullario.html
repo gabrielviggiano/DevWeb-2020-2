@@ -1,0 +1,149 @@
+<!--- Imports --->
+
+<cfajaximport />
+
+<cfimport taglib="/sistemas/contrato/CustomTags" prefix="t">
+
+<!--- Estrutura da página --->
+
+<t:htmlhead>
+    
+</t:htmlhead>
+
+<t:Page title="Lotes Edital">
+    
+    <!--- Pesquisa--->
+
+    <cfquery name="lote" datasource="#Session.Datasource#">
+            SELECT *
+            FROM contratotjes.LOTE_EDITAL
+            WHERE ID_LOTE_EDITAL = <cfqueryparam cfsqltype="cf_sql_numeric" value="#URL.ID_LOTE_EDITAL#">
+    </cfquery>
+
+    <cfquery name="itens" datasource="#Session.Datasource#">
+        SELECT *
+        FROM contratotjes.ITEM_EDITAL
+        WHERE
+            ID_LOTE_EDITAL = <cfqueryparam cfsqltype="cf_sql_numeric" value="#URL.ID_LOTE_EDITAL#"> AND
+            CD_USUAR_EXCLUSAO IS NULL
+        ORDER BY ID_ITEM_EDITAL ASC
+    </cfquery>
+
+    <cfoutput>
+
+    <div class="card">
+        <div class="card-header">
+            <!---cfinclude template="TERMO_REF_TAB.cfm"--->
+            <h3>Lote #lote.CD_LOTE_ETAP#</h3>
+        </div>
+
+        <div class="card-body">
+
+            <!--- Título --->
+            <div class="d-flex align-items-center">
+                <h4>
+                    Itens
+                </h4>
+                <a class="btn btn-primary ml-auto mb-2" href="ITEM_EDITAL_FORM.cfm?ID_CONTRATACAO=#URL.ID_CONTRATACAO#&ID_LOTE_EDITAL=#URL.ID_LOTE_EDITAL#">Novo Item</a>
+            </div>
+
+            <cfif itens.RecordCount gt 0>
+
+                <!--- Tabela  --->
+                <table class="table table-bordered table-striped small">
+                    <thead class="thead-light text-center">
+                        <!--- Cabeçalho da tabela --->
+                        <tr>
+                            <th>Código</th>
+                            <th>Descrição</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!--- Linhas da tabela --->
+                        <cfloop query="itens">
+                        <tr>
+                            <td>
+                                <a href="ITEM_EDITAL_FORM.cfm?ID_CONTRATACAO=#URL.ID_CONTRATACAO#&ID_LOTE_EDITAL=#URL.ID_LOTE_EDITAL#&ID_ITEM_EDITAL=#itens.ID_ITEM_EDITAL#&acao=atualizar">
+                                    #itens.CD_ITEM#
+                                </a>
+                            </td>
+                            <td>#itens.DS_ITEM#</td>
+                            <td>
+                                <a href="PESQUISA_MERCADO_ITEM_PESQ.cfm?ID_CONTRATACAO=#URL.ID_CONTRATACAO#&ID_LOTE_EDITAL=#URL.ID_LOTE_EDITAL#&ID_ITEM_EDITAL=#itens.ID_ITEM_EDITAL#">
+                                    Pesquisa de Mercado
+                                </a>
+                            </td>
+                            <td>
+                                <!--- Botão de excluir --->
+                                <a class="btn p-0" title="Excluir" href="ITEM_EDITAL_FORM.cfm?ID_CONTRATACAO=#URL.ID_CONTRATACAO#&ID_LOTE_EDITAL=#URL.ID_LOTE_EDITAL#&ID_ITEM_EDITAL=#itens.ID_ITEM_EDITAL#&acao=excluir">
+                                    <!--- Ícone de excluir --->
+                                    <svg id="i-trash" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="20" height="20" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                                        <path d="M28 6 L6 6 8 30 24 30 26 6 4 6 M16 12 L16 24 M21 12 L20 24 M11 12 L12 24 M12 6 L13 2 19 2 20 6" />
+                                    </svg>
+                                </a>
+                            </td>
+                        </tr>
+                        </cfloop>
+                    </tbody>
+                </table>
+
+            <cfelse>
+
+                <div class="alert alert-secondary mb-3" role="alert">
+                    Nenhum item cadastrado.
+                </div>
+
+            </cfif>
+        </div>
+
+        <div class="card-footer d-flex">
+            <a class="btn mr-auto" title="voltar" href="LOTE_EDITAL_PESQ.cfm?ID_CONTRATACAO=#URL.ID_CONTRATACAO#">
+                <!--- Ícone de voltar --->
+                <svg id="i-arrow-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                    <path d="M10 6 L2 16 10 26 M2 16 L30 16" />
+                </svg>
+            </a>
+        </div>
+    </div>
+
+    </cfoutput>
+
+    <!--- Exclusão de itens --->
+    <script>
+        function excluir(contratacao, lote, etapa){
+            if(confirm('Excluir lote "' + etapa + '"?')){
+                location.href = 'LOTE_EDITAL_FORM.cfm?ID_CONTRATACAO=' + contratacao + '&ID_LOTE_EDITAL=' + lote + '&Excluir=sim';
+            }
+        }
+    </script>
+
+    <!--- script que salva/restaura o estado da página --->
+    <script>
+        //carrega o estado
+
+        $(function(){
+            for(chave in sessionStorage){
+                if(chave.charAt(0) == '#' && sessionStorage.getItem(chave) == 'true'){
+                    $(chave).addClass('show');
+                }
+            }
+
+            $(window).scrollTop(sessionStorage.getItem('scrollPos'));
+        });
+
+        //seta o estado
+
+        $('.btn').mousedown(function(){
+            sessionStorage.setItem('scrollPos', $(window).scrollTop());
+        });
+
+        $('button[data-toggle=collapse]').click(function(){
+            var chave = $(this).attr('data-target');
+            var valor = !$(chave).hasClass('show');
+            sessionStorage.setItem(chave, valor);
+        });
+    </script>
+
+</t:Page>
