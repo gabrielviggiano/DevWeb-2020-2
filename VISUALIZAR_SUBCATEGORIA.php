@@ -74,7 +74,7 @@
         <div class="card-body">
 
             <!--- Título --->
-            <div class="d-flex align-items-center">
+            <div class="d-flex justify-content-between mb-3">
                 <h4>
                     Sub Categorias Cadastradas
                 </h4>
@@ -149,7 +149,7 @@
     <script> 
         $(function(){
         console.log('init');
-        $("#header").load("header.html"); 
+        $("#header").load("header.php"); 
         });
     </script>
 

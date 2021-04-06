@@ -25,10 +25,8 @@
 
 <!DOCTYPE html>
     <head>
-        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-        <link href="arquivo.css" rel="stylesheet">
-        <link href="bootstrap-4.5.3-dist/css/bootstrap.min.css" rel="stylesheet">
-        <link href="bootstrap-4.5.3-dist/js/bootstrap.min.js">
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>  
+        
         <meta charset="utf-8">
         <div id="header">
             
@@ -44,9 +42,7 @@
                 <h2>Usuários Cadastrados</h2>
             </div>
                 <div class="card-body">
-                    <div class="d-flex mb-3">
-
-
+                    <div class="d-flex justify-content-between mb-3">
                         <!--- Formulário de busca --->
                         <form class="form-inline mb-0 w-50" method="GET">
                             <div class="input-group w-100">
@@ -69,42 +65,42 @@
                     </div>
 
                     <table class="table table-bordered table-striped small">
-                    <thead class="thead-light text-center">
-                        <!--- Cabeçalho da tabela --->
-                        <tr>
-                            <th>Identificação do Usuário</th>
-                            <th>  Nome   </th>
-                            <th>  Login  </th>
-                            <th>  Senha  </th>
-                            <th>  Email  </th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                            while ($linha = mysqli_fetch_assoc($lista_usuarios)){
-                        ?>
-                        <tr>
-                            <td><a href="CAD_USUARIO.php?id_usuario=<?php echo $linha["ID_USUARIO"]?>&acao=alterar"> <?php echo $linha["ID_USUARIO"]?> </a>   </td>
-                            <td> <?php echo $linha["NM_USUARIO"]?>    </td> 
-                            <td> <?php echo $linha["DS_ID_USUARIO"]?> </td> 
-                            <td> <?php echo $linha["SENHA_USUARIO"]?> </td>
-                            <td> <?php echo $linha["EMAIL_USUARIO"]?> </td>
-                            <td>
-                            <!--- Botão de excluir --->
-                            <a class="btn p-0" title="Excluir" href="CAD_USUARIO.php?id_usuario=<?php echo $linha["ID_USUARIO"]?>&acao=excluir">
-                                <!--- Ícone de excluir --->
-                                <svg id="i-trash" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="20" height="20" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-                                    <path d="M28 6 L6 6 8 30 24 30 26 6 4 6 M16 12 L16 24 M21 12 L20 24 M11 12 L12 24 M12 6 L13 2 19 2 20 6" />
-                                </svg>
-                            </a>
-                        </td>
-                        </tr>                
-                        <?php
-                            }
-                        ?>
-                    </tbody>
-                </table>
+                        <thead class="thead-light text-center">
+                            <!--- Cabeçalho da tabela --->
+                            <tr>
+                                <th>Identificação do Usuário</th>
+                                <th>  Nome   </th>
+                                <th>  Login  </th>
+                                <th>  Senha  </th>
+                                <th>  Email  </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                                while ($linha = mysqli_fetch_assoc($lista_usuarios)){
+                            ?>
+                            <tr>
+                                <td><a href="CAD_USUARIO.php?id_usuario=<?php echo $linha["ID_USUARIO"]?>&acao=alterar"> <?php echo $linha["ID_USUARIO"]?> </a>   </td>
+                                <td> <?php echo $linha["NM_USUARIO"]?>    </td> 
+                                <td> <?php echo $linha["DS_ID_USUARIO"]?> </td> 
+                                <td> <?php echo $linha["SENHA_USUARIO"]?> </td>
+                                <td> <?php echo $linha["EMAIL_USUARIO"]?> </td>
+                                <td>
+                                <!--- Botão de excluir --->
+                                <a class="btn p-0" title="Excluir" href="CAD_USUARIO.php?id_usuario=<?php echo $linha["ID_USUARIO"]?>&acao=excluir">
+                                    <!--- Ícone de excluir --->
+                                    <svg id="i-trash" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="20" height="20" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                                        <path d="M28 6 L6 6 8 30 24 30 26 6 4 6 M16 12 L16 24 M21 12 L20 24 M11 12 L12 24 M12 6 L13 2 19 2 20 6" />
+                                    </svg>
+                                </a>
+                            </td>
+                            </tr>                
+                            <?php
+                                }
+                            ?>
+                        </tbody>
+                    </table>
                 </div>
     
 
@@ -122,7 +118,7 @@
     <script> 
         $(function(){
           console.log('init');
-          $("#header").load("header.html"); 
+          $("#header").load("header.php"); 
         });
     </script>
 

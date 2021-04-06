@@ -146,7 +146,7 @@
     
             </div>
 
-            <div class="card-footer d-flex">
+            <div class="card-footer d-flex justify-content-between mb-3">
                 <a class="btn mr-auto" title="voltar" href="VISUALIZAR_CATEGORIA.php">
                     <!--- Ícone de voltar --->
                     <svg id="i-arrow-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
@@ -179,7 +179,7 @@
     <script> 
         $(function(){
           console.log('init');
-          $("#header").load("header.html"); 
+          $("#header").load("header.php"); 
         });
     </script>
 

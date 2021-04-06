@@ -185,7 +185,7 @@
     <script> 
         $(function(){
           console.log('init');
-          $("#header-estoque").load("header.html"); 
+          $("#header-estoque").load("header.php"); 
         });
     </script>
 

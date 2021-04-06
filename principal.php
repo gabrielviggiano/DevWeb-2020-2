@@ -67,7 +67,7 @@
 </head>
 
 <body>
-    <?php var_dump($lista_estoques); ?>
+
     <br>
     <div class="container-fluid">
         <div class="row">
@@ -172,7 +172,7 @@
     <script> 
         $(function(){
           console.log('init');
-          $("#header-estoque").load("header.html"); 
+          $("#header-estoque").load("header.php"); 
         });
     </script>
 

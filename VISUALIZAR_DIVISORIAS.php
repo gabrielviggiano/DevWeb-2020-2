@@ -146,7 +146,7 @@
     <script> 
         $(function(){
         console.log('init');
-        $("#header").load("header.html"); 
+        $("#header").load("header.php"); 
         });
     </script>
 

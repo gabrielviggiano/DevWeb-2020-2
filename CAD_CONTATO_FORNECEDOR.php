@@ -132,7 +132,7 @@
             <div class="card-body">
                 <div class="form-group">
                     <label>Escolha o tipo de contato<span title="Campo obrigatório" class="text-danger">*</span></label>
-                    <select class="custom-select mr-sm-2" name="identificacao" id="inlineFormCustomSelect">
+                    <select style="width: 100%; margin: auto;" class="custom-select mr-sm-2" name="identificacao" id="inlineFormCustomSelect">
                                 <option selected>Escolha</option>
                                 <option value="1" <?php if($acao != 'inserir' and ($info_contato["ID_TP_CONTATO"] == '1')){?> selected <?php } ?> <?php if($acao == 'excluir'){ ?> disabled <?php } ?>>Email</option>
                                 <option value="2" <?php if($acao != 'inserir' and ($info_contato["ID_TP_CONTATO"] == '2')){?> selected <?php } ?> <?php if($acao == 'excluir'){ ?> disabled <?php } ?>>Celular</option>
@@ -146,7 +146,7 @@
                 </div>
             </div>
 
-            <div class="card-footer d-flex">
+            <div class="card-footer d-flex justify-content-between mb-3">
                 <a class="btn mr-auto" title="voltar" href="VISUALIZAR_CONTATO_FORN.php?id_fornecedor=<?php echo $_GET["id_fornecedor"]; ?>">
                     <!--- Ícone de voltar --->
                     <svg id="i-arrow-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
@@ -175,7 +175,7 @@
     <script> 
         $(function(){
           console.log('init');
-          $("#header").load("header.html"); 
+          $("#header").load("header.php"); 
         });
     </script>
 

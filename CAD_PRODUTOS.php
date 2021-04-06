@@ -58,6 +58,23 @@
     }
 ?>
 
+<?php
+    if($acao == 'inserir'){
+        $select = "SELECT * FROM CATEGORIA ";
+        if(isset($_GET["ID_CATEGORIA"])){
+            $id = $_GET["ID_CATEGORIA"];
+            $select .= "WHERE ID_CATEGORIA = {$id} ";
+        }
+
+        $lista_produtos = mysqli_query($conecta, $select);
+        if(!$lista_produtos){
+            die("Erro no Banco!");
+        }
+
+        $info_produtos = mysqli_fetch_assoc($lista_produtos);
+    }
+?>
+
 <?php 
     //atualizacao
     if(isset($_POST["atualizar"])){
@@ -138,14 +155,6 @@
             </div>
 
             <div class="card-body">
-                <div class="form-group">
-                    <label>Produto<span title="Campo obrigatório" class="text-danger">*</span></label>
-                    <input name="produto" value="<?php if($acao != 'inserir'){ echo $info_produtos["NM_PRODUTO"];}?>" type="text" maxlength="50" required class="form-control form-control-sm" <?php if($acao == 'excluir'){ ?> readonly <?php } ?>>
-                </div>
-                <div class="form-group">
-                    <label>Descrição<span title="Campo obrigatório" class="text-danger">*</span></label>
-                    <input name="descricao" value="<?php if($acao != 'inserir'){ echo $info_produtos["DS_PRODUTO"];}?>" type="text" maxlength="50" required class="form-control form-control-sm" <?php if($acao == 'excluir'){ ?> readonly <?php } ?>>
-                </div>
 
                 
                 <div class="form-row align-items-center">
@@ -161,7 +170,7 @@
                             }
                         ?> 
                     
-                        <select name="select_categoria" class="select_categoria" style="width: 100%; margin: auto;">
+                        <select name="select_categoria" class="select_categoria" style="width: 100%; margin: auto;" onchange="atualizaSubCategoria();">
                         <option value="0"></option>
                         <?php
                             while ($linha = mysqli_fetch_assoc($lista_categorias)){
@@ -169,7 +178,7 @@
 
                                 
                         ?>
-                            <option value="<?php echo $linha["ID_CATEGORIA"]?>" <?php if($acao != 'inserir' and ($linha["ID_CATEGORIA"] == $info_produtos["ID_CATEGORIA"])){?> selected <?php } ?> > <?php echo $linha["NM_CATEGORIA"]?></option>
+                            <option value="<?php echo $linha["ID_CATEGORIA"]?>" <?php if(($acao != 'inserir' and ($linha["ID_CATEGORIA"] == $info_produtos["ID_CATEGORIA"])) or ($acao == 'inserir' and isset($_GET["ID_CATEGORIA"]) and $_GET["ID_CATEGORIA"] == $linha["ID_CATEGORIA"] )){?> selected <?php } ?> > <?php echo $linha["NM_CATEGORIA"]?></option>
                         <?php
                             }
                                 }
@@ -190,7 +199,11 @@
 
                         <?php
                             $select = "SELECT * ";
-                            $select .= "FROM SUB_CATEGORIA";
+                            $select .= "FROM SUB_CATEGORIA ";
+                            if(isset($_GET["ID_CATEGORIA"])){
+                                $id = $_GET["ID_CATEGORIA"];
+                                $select .= "WHERE ID_CATEGORIA = {$id} ";
+                            }
                             $lista_sub_categorias = mysqli_query ($conecta, $select);
                             if(!$lista_sub_categorias){
                                 die("Erro no Banco!");
@@ -211,14 +224,17 @@
                         </select>
                     </div>
                 </div>
-                <script>
-                    $(document).ready(function() {
-                        $(".select_sub_categoria").select2();
-                    });
-                </script>
+                <div class="form-group">
+                    <label>Nome do Produto<span title="Campo obrigatório" class="text-danger">*</span></label>
+                    <input name="produto" value="<?php if($acao != 'inserir'){ echo $info_produtos["NM_PRODUTO"];}?>" type="text" maxlength="100" required class="form-control form-control-sm" <?php if($acao == 'excluir'){ ?> readonly <?php } ?>>
+                </div>
+                <div class="form-group">
+                    <label>Descrição<span title="Campo obrigatório" class="text-danger">*</span></label>
+                    <input name="descricao" value="<?php if($acao != 'inserir'){ echo $info_produtos["DS_PRODUTO"];}?>" type="text" maxlength="100" required class="form-control form-control-sm" <?php if($acao == 'excluir'){ ?> readonly <?php } ?>>
+                </div>                        
             </div>
 
-            <div class="card-footer d-flex">
+            <div class="card-footer d-flex justify-content-between mb-3 ">
                 <a class="btn mr-auto" title="voltar" href="VISUALIZAR_PRODUTOS.php">
                     <!--- Ícone de voltar --->
                     <svg id="i-arrow-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
@@ -251,8 +267,17 @@
     <script> 
         $(function(){
           console.log('init');
-          $("#header").load("header.html"); 
+          $("#header").load("header.php"); 
         });
+
+        function atualizaSubCategoria(){
+            try{
+                var categoria = $("[name='select_categoria']").val();
+                window.location.href="CAD_PRODUTOS.php?ID_CATEGORIA=" + categoria;
+            }catch(e){
+            
+            }
+        }
     </script>
 
 </html>

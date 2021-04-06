@@ -143,12 +143,11 @@
                 </div>
                 <div class="form-group">
                     <label>Escolha o tipo de documento<span title="Campo obrigatório" class="text-danger">*</span></label>
-                    <select class="custom-select mr-sm-2" name = 'cd_tipo_fornecedor' id="inlineFormCustomSelect">
-                    
-                                <option selected <?php if($acao == 'excluir'){ ?> disabled <?php } ?>>Escolha</option>
-                                <option value="1" <?php if($acao != 'inserir' and ($info_fornecedor["CD_TP_FORNECEDOR"] == '1')){?> selected <?php } ?> <?php if($acao == 'excluir'){ ?> disabled <?php } ?>>CPF</option>
-                                <option value="2" <?php if($acao != 'inserir' and ($info_fornecedor["CD_TP_FORNECEDOR"] == '2')){?> selected <?php } ?> <?php if($acao == 'excluir'){ ?> disabled <?php } ?>>CNPJ</option>
-                                <option value="3" <?php if($acao != 'inserir' and ($info_fornecedor["CD_TP_FORNECEDOR"] == '3')){?> selected <?php } ?> <?php if($acao == 'excluir'){ ?> disabled <?php } ?>>Outro</option>
+                    <select style="width: 100%; margin: auto;" name='cd_tipo_fornecedor' id="inlineFormCustomSelect">
+                        <option selected <?php if($acao == 'excluir'){ ?> disabled <?php } ?>>Escolha uma opção</option>
+                        <option value="1" <?php if($acao != 'inserir' and ($info_fornecedor["CD_TP_FORNECEDOR"] == '1')){?> selected <?php } ?> <?php if($acao == 'excluir'){ ?> disabled <?php } ?>>CPF</option>
+                        <option value="2" <?php if($acao != 'inserir' and ($info_fornecedor["CD_TP_FORNECEDOR"] == '2')){?> selected <?php } ?> <?php if($acao == 'excluir'){ ?> disabled <?php } ?>>CNPJ</option>
+                        <option value="3" <?php if($acao != 'inserir' and ($info_fornecedor["CD_TP_FORNECEDOR"] == '3')){?> selected <?php } ?> <?php if($acao == 'excluir'){ ?> disabled <?php } ?>>Outro</option>
                     </select>        
                 </div> 
                 <div class="form-group">
@@ -158,7 +157,7 @@
 
             </div>
 
-            <div class="card-footer d-flex">
+            <div class="card-footer d-flex justify-content-between mb-3">
                 <a class="btn mr-auto" title="voltar" href="VISUALIZAR_FORNECEDOR.php">
                     <!--- Ícone de voltar --->
                     <svg id="i-arrow-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
@@ -186,7 +185,7 @@
     <script> 
         $(function(){
           console.log('init');
-          $("#header").load("header.html"); 
+          $("#header").load("header.php"); 
         });
     </script>
 

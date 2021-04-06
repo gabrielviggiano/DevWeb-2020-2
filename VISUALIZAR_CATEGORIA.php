@@ -47,7 +47,7 @@
                 <h2>Categorias Cadastrados</h2>
             </div>
                 <div class="card-body">
-                    <div class="d-flex mb-3">
+                    <div class="d-flex justify-content-between mb-3">
                         <!--- Formulário de busca --->
                         <form class="form-inline mb-0 w-50" method="GET">
                             <div class="input-group w-100">
@@ -137,7 +137,7 @@
     <script> 
         $(function(){
           console.log('init');
-          $("#header").load("header.html"); 
+          $("#header").load("header.php"); 
         });
     </script>
 

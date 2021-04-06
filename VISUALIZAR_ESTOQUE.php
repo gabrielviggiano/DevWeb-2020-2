@@ -46,7 +46,7 @@
                 <h2>Estoques Cadastrados</h2>
             </div>
                 <div class="card-body">
-                    <div class="d-flex mb-3">
+                    <div class="d-flex justify-content-between mb-3">
 
 
                         <!--- Formulário de busca --->
@@ -136,7 +136,7 @@
     <script> 
         $(function(){
           console.log('init');
-          $("#header").load("header.html"); 
+          $("#header").load("header.php"); 
         });
     </script>
 

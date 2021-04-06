@@ -5,9 +5,50 @@
         <meta charset="utf-8">
         <link href="arquivo.css" rel="stylesheet">
         <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+        <link href="bootstrap/js/bootstrap.min.js">
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+        <meta charset="utf-8">
+
+        <!--- Arquivos para Select com Busca --->
+        <link href="css/select2.min.css" rel="stylesheet" />
+        <script src="js/select2.min.js"></script>
+        <script>
+          //função default do jquery é similar ao document.ready
+          $(function(){
+              //ativa select2 para os selects (ignora os selects que possam já ter o select2 ativo em outro momento)
+              $('select').each(function(){
+                  if(!$(this).hasClass('select2-hidden-accessible'))
+                      $(this).select2();
+              });
+          });
+
+          //desconsidera espaços em branco nos inputs
+          $(function(){
+              $('input, textarea').blur(function(){
+                  $(this).val($(this).val().trim());
+              });
+          });
+
+          //limpa campos CPF/CNPJ ao colar (deixa apenas os números)
+          $(function(){
+              $('[data-colar-numeros]').on('paste', function(e){
+                  var valor = e.originalEvent.clipboardData.getData('text');
+                  var valorLimpo = '';
+                  for(var i = 0; i < valor.length; i++){
+                      if(valor.charCodeAt(i) >= '0'.charCodeAt(0) && valor.charCodeAt(i) <= '9'.charCodeAt(0)){
+                          valorLimpo += valor.charAt(i);
+                      }
+                  }
+                  e.preventDefault(); //necessário para impedir de colar o texto original
+                  $(this).val(valorLimpo);
+              });
+          });
+        </script>
+
+        
     </head>
     <body>
-        
+
         <div class="header">
             <img src="" alt="Minha Figura" class="vertical-align"> 
        
