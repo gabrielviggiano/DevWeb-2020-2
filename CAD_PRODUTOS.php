@@ -187,12 +187,6 @@
                     </div>
                 </div>
 
-                <script>
-                    $(document).ready(function() {
-                        $(".select_categoria").select2();
-                    });
-                </script>
-
                 <div class="form-row align-items-center">
                     <div class="col-auto my-1">
                         <label for="sub_categoria">Sub Categoria<span title="Campo obrigatório" class="text-danger">*</span></label>

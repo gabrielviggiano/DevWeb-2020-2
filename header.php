@@ -58,7 +58,7 @@
                 <a class="nav-link" href="principal.php">Principal</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Visão Geral de Estoque</a>
+                <a class="nav-link" href="VISAO_ESTOQUE.php">Visão Geral de Estoque</a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Cadastro</a>
@@ -69,12 +69,6 @@
                   <a class="dropdown-item" href="VISUALIZAR_ESTOQUE.php">Estoque</a>
                   <a class="dropdown-item" href="VISUALIZAR_USUARIOS.php">Novo Usuário</a>
                 </div>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Pesquisa</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Controle de Recebimento</a>
               </li>
             </ul>
            
